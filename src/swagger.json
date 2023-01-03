@@ -1,0 +1,345 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Tasks Application",
+    "description": "Tasks Manager Application",
+    "version": "1.0.0",
+    "contact": {
+      "email": "paulo.andreola@dataside.com.br",
+      "url": "https://dataside.com.br"
+    }
+  },
+  "servers": [{ "url": "http://localhost:3000" }],
+  "paths": {
+    "/users/register/": {
+      "post": {
+        "tags": [ "Users" ],
+        "summary": "Create a user",
+        "description": "Create a new user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Insert name, email, password and confirmpassword to create a new account."
+          }
+        }
+      }
+    },
+    "/users/login/": {
+      "post": {
+        "tags": [ "Users" ],
+        "summary": "Login",
+        "description": "Login",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "email": "teste@gmail.com",
+                    "password": "123456"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Insert correct email or password."
+          }
+        }
+      }
+    },
+    "/users/avatar": {
+      "patch": {
+        "tags": [ "Users" ],
+        "summary": "Insert photo",
+        "description": "Insert a photo",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+            "application/json": {
+              "schema": {
+                 "type":  "object",
+                  "properties": {
+                    "user_id": {
+                      "type": "integer"
+                    },
+
+                    "fileName": {
+                      "type": "string",
+                     "format": "binary"
+                    } 
+                  }
+                }
+              }
+            }  
+          }
+        },        
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user_photo"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "User not found."
+          }
+        }
+      }
+    },
+    "/users/": {
+      "put": {
+        "tags": [ "Users" ],
+        "summary": "Edit user by id",
+        "description": "Edit a exist user by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "header",
+            "description": "The user Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }  
+          },
+          "400": {
+            "description": "Insert a new name ."
+          }
+        }
+      }  
+    },
+    "/tasks/": {
+      "post": {
+        "tags": [ "Tasks" ],
+        "summary": "Create a task",
+        "description": "Create a new task",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tasks"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [ "Tasks" ],
+        "summary": "List task by id",
+        "description": "List task by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "header",
+            "description": "The task Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Task not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [ "Tasks" ],
+        "summary": "Remove task by id",
+        "description": "Remove task ******from team****** by id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "id": "03d8a4b6-f4e3-4f23-afab-35fb8f364740"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "****************User/task not found************"
+          }
+        }
+      },
+      "put": {
+        "tags": [ "Tasks" ],
+        "summary": "Edit task by id",
+        "description": "Edit a task by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "header",
+            "description": "The task Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              }
+            }  
+          },
+          "400": {
+            "description": "Insert a correct task ."
+          }
+        }
+      }  
+    },
+    "/tasks": {
+      "get": {
+        "tags": [ "Tasks" ],
+        "summary": "List all tasks",
+        "description": "List all tasks",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/tasks"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Tasks not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Task": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "6a2ee094-584a-472a-b05e-c9638483698d"
+          },
+          "task": {
+            "type": "string",
+            "example": "Test task"
+          }
+        }
+      },
+      "User": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "b1ea8e82-95a9-44a3-915b-2cc991ad684d"
+          },
+          "name": {
+            "type": "string",
+            "example": "Paulo"
+          },
+          "email": {
+            "type": "string",
+            "example": "teste@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "A12345"
+          }
+        }
+      },
+      "Department": {
+        "properties": {
+          "Development": {
+            "type": "array",
+            "example": []
+          },
+          "AI_01": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/user"
+            }
+          },
+          "AI_02": {
+            "type": "array",
+            "example": []
+          },
+          "RPA": {
+            "type": "array",
+            "example": []
+          }
+        }
+      }
+    }
+  }
+}
