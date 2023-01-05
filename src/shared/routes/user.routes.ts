@@ -4,7 +4,7 @@ import { Router } from 'express';
 // import uploadConfig from '../../../config/uploads';
 
 // import { ensureAuthenticated } from '../../../middlewares/ensureAuthenticated';
-// import { createUserController } from '../useCases/createUser';
+import { createUserController } from '../../modules/user/useCase/createUser';
 // import { loginUserController } from '../useCases/loginUser';
 // import { updateAvatarUserController } from '../useCases/updateAvatarUser';
 // import { updateUserController } from '../useCases/updateUser';
@@ -13,7 +13,7 @@ export const usersRoutes = Router();
 
 // const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'));
 
-// usersRoutes.post('/register', (request, response) => createUserController.handle(request, response));
+usersRoutes.post('/register', (request, response) => createUserController.handle(request, response));
 
 // usersRoutes.get('/login', (request, response) => loginUserController.handle(request, response));
 
