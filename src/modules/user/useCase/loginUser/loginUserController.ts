@@ -8,8 +8,8 @@ export class LoginUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       const { email, password } = request.body;
-      const retUser = await this.loginUserUseCase.execute({ email, password });
-      return response.json(retUser).status(201);
+      const user = await this.loginUserUseCase.execute({ email, password });
+      return response.json(user).status(201);
     } catch (error) {
       return response.status(400).json(error); 
     }
