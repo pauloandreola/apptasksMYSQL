@@ -1,32 +1,22 @@
 import { connection } from "../../../../../shared/infra/services/db";
 
-// import { IUserDTO } from "../../../../dtos/IUserDTO";
+import { ICreateUserDTO } from "../../../../dtos/ICreateUserDTO";
+import { User } from "../../../entities/user";
 import { IUsersRepository } from "../IUsersRepository"
 
 export class UsersRepository implements IUsersRepository {
   constructor() {}
 
-  // async createUser({ name, email, password, department}: IUserDTO): Promise<void> {
-  //   conn.connect(function(err) {
-  //     if (err) throw err;
-  //     var sql = `INSERT INTO
-  //     users (name, email, password, department)
-  //     VALUES (?,?,?,?)`
-  //     conn.query(sql, function (err, result) {
-  //       if (err) throw err;
-  //       console.log("User included", result);
-  //     });
-  //   });
-  //   conn.end();
-  // }
+  async createUser({ name, email, admin, department, password }: ICreateUserDTO): Promise<void> {
+    const conn = await connection();
+    var insertUser = conn.query(`INSERT INTO users (name, email, department, admin, password) VALUES (?,?,?,?,?)`, [ name, email, admin, department, password ]);
+  }
 
-  async createUserTable(): Promise<void> {
-    connection.connect(function(err) {
-      if (err) throw err;
-      console.log("MySQL to create user table Connected!");
-      var sql = `CREATE TABLE IF NOT EXISTS
+  async createUserTable(): Promise<void> { 
+    const conn = await connection();
+    var createTable = conn.query(`CREATE TABLE IF NOT EXISTS
       users (
-        user_id VARCHAR(100) PRIMARY KEY NOT NULL,
+        user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE,
         admin BOOLEAN,
@@ -34,52 +24,30 @@ export class UsersRepository implements IUsersRepository {
         avatar LONGBLOB,
         department VARCHAR(50),
         created_at TIMESTAMP default now(),
-        updated_at TIMESTAMP);`
-      connection.query(sql, function (err, result) {
-        if (err) throw err;
-        console.log("If not exists user table created!");
-      });
-    }); 
-
+        updated_at TIMESTAMP)`);
   }
 
-  // async findByEmail(email: string): Promise<any> {
-  //   const user = conn.connect(function(err) {
-  //     if (err) throw err;
-  //     var sql = `SELECT * FROM users WHERE email = ?`;
-  //     conn.query(sql, function (err, result) {
-  //       if (err) throw err;
-  //       console.log("User founded", result);
-  //     });
-  //   });   conn.end();
+  async findByEmail(email: string): Promise<User> {
+    const conn = await connection();
+    const [emailUser] = await conn.query(`SELECT users.email FROM users WHERE email = ?`, [email])
+    return emailUser[0];
+  }
 
-  //   return user;
-  // }
+  async findById(user_id: string): Promise<User> {
+    const conn = await connection();
+    const [userId] = await conn.query(`SELECT users.user_Id FROM users WHERE user_Id = ?`, [user_id])
+    return userId[0];
+  }
 
-  // async findById(user_id: string): Promise<any> {
-  //   const user = await conn.connect(function(err) {
-  //     if (err) throw err;
-  //     var sql = `SELECT * FROM users WHERE id = ?`;
-  //     conn.query(sql, function (err, result) {
-  //       if (err) throw err;
-  //       console.log("User founded", result);
-  //     });
-  //   });   conn.end();
+  async updateUser(user_id: string, name: string): Promise<User> {
+    const conn = await connection();
+    const [update] = await conn.query(`UPDATE users.user_Id SET name = ? WHERE users.user_id = ?`,[user_id, name]);
+    return update[0];
+  }
 
-  //   return user;
-  // }
-
-  // async updateUser(user_id: string, name: string): Promise<any> {
-  //   const user = await conn.connect(function(err) {
-  //     if (err) throw err;
-  //     var sql = `UPDATE users SET name = "" WHERE users.user_id = ?`;
-  //     conn.query(sql, function (err, result) {
-  //       if (err) throw err;
-  //       console.log("User updated", result);
-  //     });
-  //   });  conn.end();
-
-  //   return user;
-  // }
-  
+  async updateAvatarUser(user_id: string, avatar: string): Promise<User> {
+    const conn = await connection();
+    const [update] = await conn.query(`UPDATE users.user_Id SET avatar = ? WHERE users.user_id = ?`,[user_id, avatar]);
+    return update[0];
+  }
 }
