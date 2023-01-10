@@ -5,7 +5,7 @@ import { Router } from 'express';
 
 // import { ensureAuthenticated } from '../../../middlewares/ensureAuthenticated';
 import { createUserController } from '../../modules/user/useCase/createUser';
-// import { loginUserController } from '../useCases/loginUser';
+import { loginUserController } from '../../modules/user/useCase/loginUser';
 // import { updateAvatarUserController } from '../useCases/updateAvatarUser';
 // import { updateUserController } from '../useCases/updateUser';
 
@@ -15,7 +15,7 @@ export const usersRoutes = Router();
 
 usersRoutes.post('/register', (request, response) => createUserController.handle(request, response));
 
-// usersRoutes.get('/login', (request, response) => loginUserController.handle(request, response));
+usersRoutes.get('/login', (request, response) => loginUserController.handle(request, response));
 
 // usersRoutes.use(ensureAuthenticated);
 
