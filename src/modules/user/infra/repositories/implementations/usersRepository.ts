@@ -35,7 +35,7 @@ export class UsersRepository implements IUsersRepository {
 
   async findById(user_id: string): Promise<User> {
     const conn = await connection();
-    const [userId] = await conn.query(`SELECT users.user_id FROM users WHERE user_id = ?`, [user_id])
+    const [userId] = await conn.query(`SELECT * FROM users WHERE user_id = ?`, [user_id])
     return userId[0];
   }
 
