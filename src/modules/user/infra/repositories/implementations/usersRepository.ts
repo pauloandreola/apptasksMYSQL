@@ -35,19 +35,19 @@ export class UsersRepository implements IUsersRepository {
 
   async findById(user_id: string): Promise<User> {
     const conn = await connection();
-    const [userId] = await conn.query(`SELECT * FROM users WHERE user_Id = ?`, [user_id])
+    const [userId] = await conn.query(`SELECT users.user_id FROM users WHERE user_id = ?`, [user_id])
     return userId[0];
   }
 
   async updateAvatarUser(user_id: string, avatar: string): Promise<User> {
     const conn = await connection();
-    const [updateAvatar] = await conn.query(`UPDATE users.user_Id SET avatar = ? WHERE users.user_id = ?`,[user_id, avatar]);
+    const [updateAvatar] = await conn.query(`UPDATE users SET avatar = ? WHERE user_id = ?`,[avatar, user_id]);
     return updateAvatar[0];
   }
 
   async updateUser(user_id: string, name: string): Promise<User> {
     const conn = await connection();
-    const [updateUser] = await conn.query(`UPDATE users.user_Id SET name = ? WHERE users.user_id = ?`,[user_id, name]);
+    const [updateUser] = await conn.query(`UPDATE users SET name = ? WHERE user_id = ?`,[name, user_id]);
     return updateUser[0];
   }
 }
