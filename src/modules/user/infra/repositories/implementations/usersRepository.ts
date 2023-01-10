@@ -29,13 +29,13 @@ export class UsersRepository implements IUsersRepository {
 
   async findByEmail(email: string): Promise<User> {
     const conn = await connection();
-    const [emailUser] = await conn.query(`SELECT users.email FROM users WHERE email = ?`, [email])
+    const [emailUser] = await conn.query(`SELECT * FROM users WHERE email = ?`, [email])
     return emailUser[0];
   }
 
   async findById(user_id: string): Promise<User> {
     const conn = await connection();
-    const [userId] = await conn.query(`SELECT users.user_Id FROM users WHERE user_Id = ?`, [user_id])
+    const [userId] = await conn.query(`SELECT * FROM users WHERE user_Id = ?`, [user_id])
     return userId[0];
   }
 
