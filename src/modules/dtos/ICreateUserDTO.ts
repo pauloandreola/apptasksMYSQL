@@ -1,8 +1,8 @@
 export interface ICreateUserDTO {
   user_id?: string,
-  name?: string,
+  name: string,
   email: string,
-  admin?: boolean,
+  admin: boolean,
   password: string,
   confpassword?: string,
   avatar?: string,
