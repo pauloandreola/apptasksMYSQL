@@ -7,7 +7,7 @@ import { Router } from 'express';
 import { createUserController } from '../../modules/user/useCase/createUser';
 import { loginUserController } from '../../modules/user/useCase/loginUser';
 // import { updateAvatarUserController } from '../useCases/updateAvatarUser';
-// import { updateUserController } from '../useCases/updateUser';
+import { updateUserController } from '../../modules/user/useCase/updateUser';
 
 export const usersRoutes = Router();
 
@@ -21,4 +21,4 @@ usersRoutes.get('/login', (request, response) => loginUserController.handle(requ
 
 // usersRoutes.patch('/avatar', (request, response) => updateAvatarUserController.handle(request, response));
 
-// usersRoutes.patch('/:id', (request, response) => updateUserController.handle(request, response));
+usersRoutes.put('/:id', (request, response) => updateUserController.handle(request, response));
