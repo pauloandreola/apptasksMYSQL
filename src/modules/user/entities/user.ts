@@ -1,5 +1,3 @@
-import { v4 as uuidV4 } from 'uuid';
-
 export class User {
   'user_id': string
   'name': string
@@ -11,7 +9,7 @@ export class User {
   'created_at': Date
   'updated_at': Date
 
-  constructor(user_id = uuidV4(), name: string, email: string, admin: boolean, password: string, avatar: string, department: 'Development' | 'IA' | 'RPA', created_at: Date, updated_at: Date) {
+  constructor(user_id: string, name: string, email: string, admin: boolean, password: string, avatar: string, department: 'Development' | 'IA' | 'RPA', created_at: Date, updated_at: Date) {
     user_id: user_id;
     name: name;
     email: email;

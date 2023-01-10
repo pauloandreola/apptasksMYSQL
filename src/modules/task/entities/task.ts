@@ -1,5 +1,4 @@
 import { v4 as uuidV4 } from 'uuid';
-
 export class Task {
   'task_id': string;
   'user_id': string;
@@ -11,7 +10,7 @@ export class Task {
   'end_date': Date;
   'total': number;
 
-  constructor(task_id = uuidV4(), user_id: string, project: string, task: string, created_at: Date, updated_at: Date, start_date: Date, end_date: Date, total: number) {
+  constructor(task_id: string, user_id: string, project: string, task: string, created_at: Date, updated_at: Date, start_date: Date, end_date: Date, total: number) {
 
     task_id: task_id;
     user_id: user_id;
