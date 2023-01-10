@@ -14,13 +14,13 @@
     "/users/register/": {
       "post": {
         "tags": [ "Users" ],
-        "summary": "Create a user",
+        "summary": "Create a new user",
         "description": "Create a new user",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/user"
+                "$ref": "#/components/schemas/User"
               }
             }
           }
@@ -30,7 +30,7 @@
             "description": "OK"
           },
           "400": {
-            "description": "Insert name, email, password and confirmpassword to create a new account."
+            "description": "Insert name, email, password and password again to create a new account."
           }
         }
       }
@@ -64,7 +64,7 @@
             }
           },
           "500": {
-            "description": "Insert correct email or password."
+            "description": "Insert correct email and password."
           }
         }
       }
@@ -84,8 +84,7 @@
                     "user_id": {
                       "type": "integer"
                     },
-
-                    "fileName": {
+                    "avatar": {
                       "type": "string",
                      "format": "binary"
                     } 
@@ -250,7 +249,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/tasks"
+                  "$ref": "#/components/schemas/Task"
                 }
               }
             }  
@@ -272,7 +271,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/tasks"
+                  "$ref": "#/components/schemas/Task"
                 }
               }
             }
@@ -288,55 +287,109 @@
     "schemas": {
       "Task": {
         "properties": {
-          "id": {
+          "task_id": {
             "type": "string",
-            "example": "6a2ee094-584a-472a-b05e-c9638483698d"
+            "example": "1"
+          },
+          "project": {
+            "type": "string",
+            "example": "Test project"
           },
           "task": {
             "type": "string",
             "example": "Test task"
+          },
+          "created_at": {
+            "type": "Date",
+            "example": "2023-01-01 09:00:00"
+          },          
+          "updated_at": {
+            "type": "Date",
+            "example": "2023-01-02 09:00:00"
+          },
+          "start_date": {
+            "type": "Date",
+            "example": "2023-01-01 09:00:00"
+          },
+          "end-date": {
+            "type": "Date",
+            "example": "2023-01-04 09:00:00"
+          },
+          "total": {
+            "type": "number",
+            "example": "3 days"
+          },
+          "user_id": {
+            "type": "string",
+            "example": "1"
           }
         }
       },
       "User": {
         "properties": {
-          "id": {
+          "user_id": {
             "type": "string",
-            "example": "b1ea8e82-95a9-44a3-915b-2cc991ad684d"
+            "example": "1"
           },
           "name": {
             "type": "string",
-            "example": "Paulo"
+            "example": "Test"
           },
           "email": {
             "type": "string",
-            "example": "teste@gmail.com"
+            "example": "test@gmail.com"
+          },
+          "admin": {
+            "type": "boolean",
+            "example": false
           },
           "password": {
             "type": "string",
             "example": "A12345"
+          },
+          "confpassword": {
+            "type": "string",
+            "example": "A12345"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "Em execução"
+          },
+          "department": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Department"
+            }
+          },
+          "created_at": {
+            "type": "Date",
+            "example": "2023-01-01 09:00:00"
+          },          
+          "updated_at": {
+            "type": "Date",
+            "example": "2023-01-02 09:00:00"
           }
         }
       },
       "Department": {
         "properties": {
-          "Development": {
-            "type": "array",
-            "example": []
-          },
-          "AI_01": {
+          "Developers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/user"
+              "$ref": "#/components/schemas/User"
             }
           },
-          "AI_02": {
+          "IA": {
             "type": "array",
-            "example": []
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
           },
           "RPA": {
             "type": "array",
-            "example": []
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
           }
         }
       }
