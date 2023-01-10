@@ -2,35 +2,28 @@ import { hash } from 'bcryptjs';
 
 import { AppError } from '../../../../errors/appErrors';
 
-import { IUserDTO } from '../../../dtos/IUserDTO';
+import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO';
+import { User } from '../../entities/user';
 import { IUsersRepository } from '../../infra/repositories/IUsersRepository';
 
 export class CreateUserUseCase {
   constructor( private usersRepository: IUsersRepository ) {}
 
-  async execute({ name, email, department, password, confpassword }: IUserDTO): Promise<void> {
-
-    // console.log('Use case',name);
-    // console.log(email);
-    // console.log(password);
-    // console.log(department);
-    // console.log(confpassword);
-
+  async execute({name, email, admin, password, confpassword, department }: ICreateUserDTO): Promise<void> {
 
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
-     if (userAlreadyExists) {
+    if (userAlreadyExists) {
       throw new AppError('User already exists');
     }
-
     if (password != confpassword) {
       throw new AppError('Password is not the same');
     }
     
     const passwordHash = await hash(password, 8);
 
-    // console.log('Criptografado',passwordHash);
+    await this.usersRepository.createUser({ name, email, admin, password :passwordHash, department });
 
-    await this.usersRepository.createUser({ name, email, password :passwordHash, department });
   }
+  
 }
