@@ -4,7 +4,6 @@ import * as EmailValidator from 'email-validator';
 import { AppError } from '../../../../errors/appErrors';
 
 import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO';
-import { User } from '../../entities/user';
 import { IUsersRepository } from '../../infra/repositories/IUsersRepository';
 
 export class CreateUserUseCase {
@@ -27,17 +26,13 @@ export class CreateUserUseCase {
     if (!EmailValidator.validate(email)) {
       throw new AppError('Invalid e-mail');
     }
-   
+
     const userExists = await this.usersRepository.findByEmail(email);
 
     if (userExists) {
       throw new AppError('User already exists');
     }
-    
     const passwordHash = await hash(password, 8);
-
     await this.usersRepository.createUser({ name, email, admin, password :passwordHash, department });
-
   }
-  
 }
