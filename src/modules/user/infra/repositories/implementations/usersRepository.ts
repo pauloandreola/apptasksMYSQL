@@ -7,9 +7,9 @@ import { IUsersRepository } from "../IUsersRepository"
 export class UsersRepository implements IUsersRepository {
   constructor() {}
 
-  async createUser({ name, email, admin, department, password }: ICreateUserDTO): Promise<void> {
+  async createUser({ name, email, admin, password, department }: ICreateUserDTO): Promise<void> {
     const conn = await connection();
-    var insertUser = conn.query(`INSERT INTO users (name, email, department, admin, password) VALUES (?,?,?,?,?)`, [ name, email, admin, department, password ]);
+    var insertUser = conn.query(`INSERT INTO users (name, email, admin, password, department) VALUES (?,?,?,?,?)`,[ name, email, admin, password, department ]);
   }
 
   async createUserTable(): Promise<void> { 
@@ -22,24 +22,24 @@ export class UsersRepository implements IUsersRepository {
         admin BOOLEAN,
         password VARCHAR(100),
         avatar LONGBLOB,
-        department VARCHAR(50),
+        department VARCHAR(20),
         created_at TIMESTAMP default now(),
         updated_at TIMESTAMP)`);
   }
 
   async findByEmail(email: string): Promise<User> {
     const conn = await connection();
-    const [emailUser] = await conn.query(`SELECT * FROM users WHERE email = ?`, [email])
+    const [emailUser] = await conn.query(`SELECT * FROM users WHERE email = ?`,[email])
     return emailUser[0];
   }
 
   async findById(user_id: string): Promise<User> {
     const conn = await connection();
-    const [userId] = await conn.query(`SELECT * FROM users WHERE user_id = ?`, [user_id])
+    const [userId] = await conn.query(`SELECT * FROM users WHERE user_id = ?`,[user_id])
     return userId[0];
   }
 
-  async updateAvatarUser(user_id: string, avatar: string): Promise<User> {
+  async updateUserAvatar(user_id: string, avatar: string): Promise<User> {
     const conn = await connection();
     const [updateAvatar] = await conn.query(`UPDATE users SET avatar = ? WHERE user_id = ?`,[avatar, user_id]);
     return updateAvatar[0];
