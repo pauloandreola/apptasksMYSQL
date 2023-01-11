@@ -1,16 +1,16 @@
 import { Router } from 'express';
 
-// import { createTaskController } from "../useCases/createTask";
-// import { deleteTaskController } from "../useCases/deleteTask";
-// import { listAllTasksController } from '../useCases/listAllTasks';
-// import { listTaskController } from '../useCases/listTask';
-// import { updateTaskController } from "../useCases/updateTask";
+import { createTaskController } from "../../modules/task/useCase/createTask";
+import { deleteTaskController } from "../../modules/task/useCase/deleteTask";
+// import { listAllTasksController } from '../../modules/task/useCase/listAllTasks';
+// import { listTaskController } from '../../modules/task/useCase/listTask';
+// import { updateTaskController } from "../../modules/task/useCase/updateTask";
 
 export const tasksRoutes = Router();
 
-// tasksRoutes.post('/', (request, response) => createTaskController.handle(request, response));
+tasksRoutes.post('/:id', (request, response) => createTaskController.handle(request, response));
 
-// tasksRoutes.delete('/:id', (request, response) => deleteTaskController.handle(request, response));
+tasksRoutes.delete('/:id', (request, response) => deleteTaskController.handle(request, response));
 
 // tasksRoutes.get('/', (request, response) => listAllTasksController.handle(request, response));
 
