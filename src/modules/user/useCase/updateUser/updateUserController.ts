@@ -8,8 +8,7 @@ export class UpdateUserController {
     try {
       const id = request.params.id;
       const { name } = request.body;
-
-      const user = await this.updateUserUseCase.execute(id, name);
+      await this.updateUserUseCase.execute(id, name);
       return response.json('User updated');
     } catch (error) {
       return response.status(405).json(error);
