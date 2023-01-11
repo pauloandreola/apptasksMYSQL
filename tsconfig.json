@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+     "lib": [
+        "es5",
+        "es6",
+        "ES2020"
+     ],
+     "target": "es2017",
+     "module": "commonjs",
+     "rootDir": "./",
+     "baseUrl": "./src",
+     "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@errors/*": ["errors/*"],
+      "@utils/*": ["utils/*"], 
+     },
+     "esModuleInterop": true,
+     "experimentalDecorators": true,
+     "emitDecoratorMetadata": true,
+     "skipLibCheck": true,
+     "forceConsistentCasingInFileNames": true,
+     "resolveJsonModule": true,
+
+     "moduleResolution": "node",
+     "outDir": "./build",
+     "sourceMap": true,
+  }
+}
