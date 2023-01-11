@@ -15,7 +15,7 @@ export class CreateUserUseCase {
       throw new AppError('Please verify a blank field');
     }
     if (name.length < 3 ) {
-      throw new AppError('Name is too short');
+      throw new AppError('Name is too short, need more then 2 characters');
     }
     if (password.length < 6 ) {
     throw new AppError('Password is too short');
