@@ -1,14 +1,16 @@
 # apptasksMYSQL
 
+# Requisitos
+
 # Não funcionais
 
 - Utilizar o webframework Express (Paulo) - OK
 - Utilizar o banco de dados MySQL (Paulo) - OK
-- Todos os endpoints deverão ser documentados utilizando Swagger (Open API 3.0) - OK - Parcial
-- Bancos de dados deverão estar rodando em um container Docker localmente - Não OK
+- Todos os endpoints deverão ser documentados utilizando Swagger (Open API 3.0) - OK
+- Bancos de dados deverão estar rodando em um container Docker localmente - *****Não*****
 - Não será utilizado ORM, apenas queries SQL puras - OK
-- A senha de cada usuário deverá ser salva no banco de dados de forma criptografada - OK -
-- Utilizar ESLint, Prettier e ts-prune para manter o código dentro dos padrões - OK - Verificar
+- A senha de cada usuário deverá ser salva no banco de dados de forma criptografada - OK
+- Utilizar ESLint, Prettier e ts-prune para manter o código dentro dos padrões - OK - ****Verificar****
 - O código deve estar seguindo boas práticas como Clean Code, SOLID, etc - OK
 - Em toda requisição que houver entrada de dados, deverá haver validação dos dados - OK
 - Aplicar testes unitários para as classes e funções de regras de negócio - 
@@ -19,10 +21,11 @@
 - Para uploads, deverá ser feito utilizando form data - 
 - Utilizar middleware para validação de autenticação nas rotas públicas - 
 
-# Requisitos
-- Deverá ser possível cadastrar um novo usuário. Será uma rota pública que receberá nome, e-mail e senha. O nome precisará ter pelo menos 3 caracteres. O e-mail deverá ser um e-mail válido. A senha deverá ter no mínimo 6 caracteres - 
+# Funcionais
+
+- Deverá ser possível cadastrar um novo usuário. Será uma rota pública que receberá nome, e-mail e senha. O nome precisará ter pelo menos 3 caracteres. O e-mail deverá ser um e-mail válido. A senha deverá ter no mínimo 6 caracteres - Ok.
 - Não deverá existir usuários duplicados: verificar utilizando o e-mail - OK
-- Deverá ser possível realizar login. Será uma rota pública que receberá e-mail e senha. - 
+- Deverá ser possível realizar login. Será uma rota pública que receberá e-mail e senha. - Ok
 - Um usuário que não for cadastrado não deverá conseguir logar na aplicação -  
 - Deverá ser possível um usuário inserir uma nova foto de perfil. Será uma rota privada. - OK - Parcial
 - Deverá ser possível atualizar os dados de um usuário. Será uma rota privada. - OK
