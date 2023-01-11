@@ -7,9 +7,12 @@ export class UpdateUserUseCase {
 
   async execute(user_id: string, name: string): Promise<void> {
 
-    const userAlreadyExist = await this.usersRepository.findById(user_id);
+    if (name.length < 3 ) {
+      throw new AppError('Name is too short, insert more then 2 characters');
+    }
+    const user = await this.usersRepository.findById(user_id);
 
-    if (!userAlreadyExist) {
+    if (!user) {
       throw new AppError("User not found")
     }
     await this.usersRepository.updateUser(user_id, name);
