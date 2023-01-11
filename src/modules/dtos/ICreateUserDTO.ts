@@ -1,5 +1,5 @@
 export interface ICreateUserDTO {
-  user_id?: string,
+  // user_id?: string,
   name: string,
   email: string,
   admin: boolean,
@@ -7,5 +7,4 @@ export interface ICreateUserDTO {
   confpassword?: string,
   avatar?: string,
   department?: "Development" | "IA" | "RPA",
-  created_at?: Date,
 }
