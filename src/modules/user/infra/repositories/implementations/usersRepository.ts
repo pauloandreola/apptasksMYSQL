@@ -9,7 +9,7 @@ export class UsersRepository implements IUsersRepository {
 
   async createUser({ name, email, admin, password, department }: ICreateUserDTO): Promise<void> {
     const conn = await connection();
-    var insertUser = conn.query(`INSERT INTO users (name, email, admin, password, department) VALUES (?,?,?,?,?)`,[ name, email, admin, password, department ]);
+    conn.query(`INSERT INTO users (name, email, admin, password, department) VALUES (?,?,?,?,?)`,[ name, email, admin, password, department ]);
   }
 
   async createUserTable(): Promise<void> { 
