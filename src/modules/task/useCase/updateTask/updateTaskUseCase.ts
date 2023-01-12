@@ -1,6 +1,5 @@
 
 import { AppError } from "../../../../errors/appErrors";
-import { Task } from "../../entities/task";
 
 import { ITasksRepository } from "../../infra/repositories/ITasksRepository";
 
@@ -11,6 +10,9 @@ export class UpdateTaskUseCase {
 
     if (!taskAlreadyExist) {
       throw new AppError("Task not found")
+    }
+    if (!task) {
+      throw new AppError("Please insert a new task")
     }
     this.tasksRepository.updateTask(task_id, task);
   }
