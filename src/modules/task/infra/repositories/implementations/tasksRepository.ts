@@ -45,7 +45,13 @@ export class TasksRepository implements ITasksRepository {
     const [tasks] = await conn.query(`SELECT * FROM tasks`);
     return tasks as any;
   }
-
+  
+  async updateProject(task_id: string, project: string): Promise<Task> {
+    const conn = await connection();
+    const [taskUpdate] = await conn.query(`UPDATE tasks SET project = ? WHERE task_id = ?`, [project, task_id]);
+    return taskUpdate[0];
+  }
+  
   async updateTask(task_id: string, task: string): Promise<Task> {
     const conn = await connection();
     const [taskUpdate] = await conn.query(`UPDATE tasks SET task = ? WHERE task_id = ?`, [task, task_id]);

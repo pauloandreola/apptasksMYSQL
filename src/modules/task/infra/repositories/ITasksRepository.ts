@@ -7,5 +7,6 @@ export interface ITasksRepository {
   deleteTask(task_id: string): Promise<void>;
   findTaskById(task_id: string): Promise<Task>;
   listAllTasks(): Promise<Task[]>;
+  updateProject(task_id: string, project:string): Promise<Task>;
   updateTask(task_id: string, task: string): Promise<Task>;
 }
