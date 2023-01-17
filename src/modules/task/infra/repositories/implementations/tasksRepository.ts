@@ -37,6 +37,12 @@ export class TasksRepository implements ITasksRepository {
     conn.query(`DELETE FROM tasks WHERE task_id = (?)`,[task_id]);
   }
 
+  async endTask(task_id: string, task: string): Promise<Task> {
+    const conn = await connection();
+    const [taskEnd] = await conn.query(`UPDATE tasks SET task = ?, end_date = CURRENT_TIMESTAMP WHERE task_id = ?`, [task, task_id]);
+    return taskEnd[0];
+  }
+
   async findTaskById(task_id: string): Promise<Task> {
     const conn = await connection();
     const [taskId] = await conn.query(`SELECT * FROM tasks WHERE task_id = ?`,[task_id]);
@@ -47,6 +53,12 @@ export class TasksRepository implements ITasksRepository {
     const conn = await connection();
     const [tasks] = await conn.query(`SELECT * FROM tasks`);
     return tasks as any;
+  }
+
+  async startTask(task_id: string, task: string): Promise<Task> {
+    const conn = await connection();
+    const [taskStart] = await conn.query(`UPDATE tasks SET task = ?, start_date = CURRENT_TIMESTAMP WHERE task_id = ?`, [task, task_id]);
+    return taskStart[0];
   }
   
   async updateProject(task_id: string, project: string): Promise<Task> {
@@ -60,4 +72,5 @@ export class TasksRepository implements ITasksRepository {
     const [taskUpdate] = await conn.query(`UPDATE tasks SET task = ?, updated_at = CURRENT_TIMESTAMP WHERE task_id = ?`, [task, task_id]);
     return taskUpdate[0];
   }
+  
 }
