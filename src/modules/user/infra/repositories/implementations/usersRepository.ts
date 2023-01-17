@@ -47,7 +47,7 @@ export class UsersRepository implements IUsersRepository {
 
   async updateUser(user_id: string, name: string): Promise<User> {
     const conn = await connection();
-    const [updateUser] = await conn.query(`UPDATE users SET name = ? WHERE user_id = ?`,[name, user_id]);
+    const [updateUser] = await conn.query(`UPDATE users SET name = ?, updated_at = CURRENT_TIMESTAMP WHERE user_id = ?`,[name, user_id]);
     return updateUser[0];
   }
 }
