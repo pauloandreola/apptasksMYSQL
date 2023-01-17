@@ -1,5 +1,6 @@
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken'; 
+import { User } from 'modules/user/entities/user';
 
 import { AppError } from "../../../../errors/appErrors";
 
@@ -13,7 +14,6 @@ interface IRequest {
 interface IResponse {
   user: {
     user_id: string,
-    name: string;
     email: string;
   };
   token: string;
@@ -33,15 +33,14 @@ export class LoginUserUseCase {
     }
     const userPass = await bcryptjs.compare(password, user.password);
     if(!userPass) {
-      throw new AppError('Please insert email ou password correct')
+      throw new AppError('Email or password invalid')
     }
     
-    const token = jwt.sign({ subject: user.email }, process.env.JWT_PASS ?? '', { expiresIn: '1d' });
-
+    const token = jwt.sign({id: user.user_id }, process.env.JWT_PASS ?? '', { expiresIn: '1d' });
+    console.log(token);
     const tokenReturn: IResponse = {
       user: {
         user_id: user.user_id,
-        name: user.name,
         email: user.email,
       },
       token
