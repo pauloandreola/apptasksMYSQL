@@ -9,7 +9,7 @@ export class CreateUserController {
     try {
       const { name, email, admin, password, confpassword, department } = request.body;
       await this.createUserUseCase.execute({ name, email, admin, password, confpassword, department });
-      return response.json('User created').status(201);
+      return response.status(201).json('User created');
     } catch (error) {
       return response.status(400).json(error); 
     }
