@@ -8,8 +8,8 @@ export class CreateTaskController {
     try {
       const id = request.params.id;
       const { project, task } = request.body;
-      await this.createTaskUseCase.execute({user_id: id, project, task });
-      return response.json('Task created').status(201);
+      await this.createTaskUseCase.execute({ user_id: id, project, task });
+      return response.status(201).json('Task created');
     } catch (error) {
       return response.status(400).json(error); 
     }
