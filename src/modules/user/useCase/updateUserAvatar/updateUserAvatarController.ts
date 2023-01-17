@@ -7,12 +7,12 @@ export class UpdateUserAvatarController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const { id } = request.user;
-      const avatarFile = request.file?.filename;
+      const id = request.params.id;
+      const avatarFile = request.file.filename;
       console.log(id);
       console.log(avatarFile);
 
-      await this.updateUserAvatarUseCase.execute({ user_id: id, avatarFile });
+      await this.updateUserAvatarUseCase.execute( id, avatarFile );
       return response.status(204).send();
     } catch (error) {
       return response.status(400).json(error);

@@ -1,19 +1,56 @@
 import crypto from 'crypto';
 import multer from 'multer';
-import { resolve } from 'path';
+import path, { resolve } from 'path';
 
-export default {
-  upload(folder: string) {
-    return {
-      storage: multer.diskStorage({
-        destination: resolve(__dirname, '..', '..', folder),
-        filename: (request, file, callback) => {
-          const fileHash = crypto.randomBytes(16).toString('hex');
-          const fileName = `${fileHash}-${file.originalname}`;
-
-          return callback(null, fileName);
-        },
-      }),
-    };
+module.exports = {
+  dest: resolve(__dirname, '..', '..', 'tmp', 'avatar'),
+  storage: multer.diskStorage({
+    destination: (request, file, callback) => {
+      callback(null, path.resolve(__dirname, '..', '..', 'tmp', 'avatar'));
+    },
+    filename: (request, file, callback) => {
+      crypto.randomBytes(10, (err, hash) => {
+        if (err) callback
+        const fileName = `${hash.toString('hex')}-${file.originalname}`;
+        
+        callback(null, fileName)
+      });
+    },
+  }),
+  limits: {
+    fileSize: 2 * 1024 * 1024,
   },
-};
+  fileFilter: (request, file, callback) => {
+    const allowedMimes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+    ];
+
+    if (allowedMimes.includes(file.mimetype)) {
+      callback(null, true);      
+    } else {
+      callback(new Error('Invalid file type.'));
+    }
+  },
+
+}
+
+
+
+
+// export default {
+//   upload(folder: string) {
+//     return {
+//       storage: multer.diskStorage({
+//         destination: resolve(__dirname, '..', '..', folder),
+//         filename: (request, file, callback) => {
+//           const fileHash = crypto.randomBytes(16).toString('hex');
+//           const fileName = `${fileHash}-${file.originalname}`;
+
+//           return callback(null, fileName);
+//         },
+//       }),
+//     };
+//   },
+// };
