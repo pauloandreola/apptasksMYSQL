@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
+
+import { User } from "../../../entities/user";
 import { connection } from "../../../../../shared/infra/services/db";
 
 import { ICreateUserDTO } from "../../../../dtos/ICreateUserDTO";
-import { User } from "../../../entities/user";
 import { IUsersRepository } from "../IUsersRepository"
 
 export class UsersRepository implements IUsersRepository {
@@ -9,14 +11,15 @@ export class UsersRepository implements IUsersRepository {
 
   async createUser({ name, email, admin, password, department }: ICreateUserDTO): Promise<void> {
     const conn = await connection();
-    conn.query(`INSERT INTO users (name, email, admin, password, department) VALUES (?,?,?,?,?)`,[ name, email, admin, password, department ]);
+    const user_id = uuidv4();
+    conn.query(`INSERT INTO users (user_id, name, email, admin, password, department) VALUES (?,?,?,?,?,?)`,[user_id, name, email, admin, password, department ]);
   }
 
   async createUserTable(): Promise<void> { 
     const conn = await connection();
     var createTable = conn.query(`CREATE TABLE IF NOT EXISTS
       users (
-        user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        user_id VARCHAR(100) PRIMARY KEY NOT NULL,
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE,
         admin BOOLEAN,

@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { Task } from "../../../entities/task";
 import { connection } from "../../../../../shared/infra/services/db";
 
@@ -9,14 +11,15 @@ export class TasksRepository implements ITasksRepository {
 
   async createTask({user_id, project, task}: ICreateTaskDTO): Promise<void> {
     const conn = await connection();
-      var insertTask = conn.query(`INSERT INTO tasks (project, task, user_id) VALUES (?,?,?)`, [project, task, user_id]);
+    const task_id = uuidv4();
+      var insertTask = conn.query(`INSERT INTO tasks (task_id, project, task, user_id) VALUES (?,?,?,?)`, [task_id, project, task, user_id]);
   }
 
   async createTaskTable(): Promise<void> {
     const conn = await connection();
       var createTable = conn.query(`CREATE TABLE IF NOT EXISTS
       tasks (
-        task_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+        task_id VARCHAR(100) PRIMARY KEY NOT NULL,
         project VARCHAR(255),
         task VARCHAR(255),
         created_at TIMESTAMP default now(),
@@ -24,7 +27,7 @@ export class TasksRepository implements ITasksRepository {
         start_date TIMESTAMP,
         end_date TIMESTAMP,
         total INT,
-        user_id INT,
+        user_id VARCHAR(100),
         CONSTRAINT FK_user_id FOREIGN KEY (user_id)
         REFERENCES users(user_id));`)
   }
