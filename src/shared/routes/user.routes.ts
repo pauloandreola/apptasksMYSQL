@@ -17,7 +17,7 @@ usersRoutes.get('/login', (request, response) => loginUserController.handle(requ
 
 usersRoutes.use(ensureAuthenticated);
 
-usersRoutes.post('/avatar/:id', multer(multerConfig).single('avatarFile'), (request, response) => updateUserAvatarController.handle(request, response));
+usersRoutes.patch('/avatar/:id', multer(multerConfig).single('avatarFile'), (request, response) => updateUserAvatarController.handle(request, response));
 
-usersRoutes.put('/:id', (request, response) => updateUserController.handle(request, response));
+usersRoutes.patch('/:id', (request, response) => updateUserController.handle(request, response));
  
