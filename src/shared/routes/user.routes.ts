@@ -19,11 +19,11 @@ usersRoutes.post('/register', (request, response) => createUserController.handle
 
 usersRoutes.get('/login', (request, response) => loginUserController.handle(request, response));
 
-// usersRoutes.use(ensureAuthenticated);
+usersRoutes.use(ensureAuthenticated);
 
 // usersRoutes.post('/avatar', ensureAuthenticated, uploadAvatar.single('avatarFile'), (request, response) => updateUserAvatarController.handle(request, response));
 usersRoutes.post('/avatar/:id', multer(multerConfig).single('avatarFile'), (request, response) => updateUserAvatarController.handle(request, response));
 // usersRoutes.post('/avatar/:id', multer(multerConfig).single('avatarFile'), (request, response) => { console.log(request.file); return response.json("ok") });
 
-usersRoutes.put('/:id', ensureAuthenticated, (request, response) => updateUserController.handle(request, response));
+usersRoutes.put('/:id', (request, response) => updateUserController.handle(request, response));
  
