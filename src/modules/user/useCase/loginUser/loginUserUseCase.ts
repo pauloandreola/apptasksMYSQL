@@ -36,7 +36,7 @@ export class LoginUserUseCase {
     }
     
     const token = sign({ subject: user.user_id }, process.env.JWT_PASS ?? '', { expiresIn: '1d' });
-    console.log(token);
+
     const tokenReturn: IResponse = {
       token,
       user: {
