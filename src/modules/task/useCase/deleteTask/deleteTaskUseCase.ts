@@ -16,7 +16,7 @@ export class DeleteTaskUseCase {
       }
       const taskAndUserAlreadyExist = await this.tasksRepository.findUserAndTaskById(task_id, user_id);
       if (!taskAndUserAlreadyExist) {
-        throw new AppError("Task doesnt exists")
+        throw new AppError("Task doesn't exists")
       }
       
       this.tasksRepository.deleteTask(task_id);
