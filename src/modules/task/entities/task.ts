@@ -1,4 +1,3 @@
-import { v4 as uuidV4 } from 'uuid';
 export class Task {
   'task_id': string;
   'project': string;
@@ -20,6 +19,5 @@ export class Task {
     end_date: end_date;
     total: total;
     user_id: user_id;
-    
   }
 }

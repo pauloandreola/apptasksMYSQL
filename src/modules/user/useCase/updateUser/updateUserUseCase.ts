@@ -10,8 +10,8 @@ export class UpdateUserUseCase {
     if (name.length < 3 ) {
       throw new AppError('Name is too short, insert more then 2 characters');
     }
-    const user = await this.usersRepository.findById(user_id);
 
+    const user = await this.usersRepository.findById(user_id);
     if (!user) {
       throw new AppError("User not found")
     }
