@@ -9,7 +9,7 @@ export class UpdateUserAvatarController {
     try {
       const user_id = request.params.id;
       const avatarFile = request.file.filename;
-      await this.updateUserAvatarUseCase.execute( {user_id, avatarFile} );
+      await this.updateUserAvatarUseCase.execute({ user_id, avatarFile });
       return response.status(204).send();
     } catch (error) {
       return response.status(400).json(error);
