@@ -11,7 +11,7 @@
   },
   "servers": [{ "url": "http://localhost:3000" }],
   "paths": {
-    "/users/register/": {
+    "/users/register": {
       "post": {
         "tags": [ "Users" ],
         "summary": "Create a new user",
@@ -35,7 +35,7 @@
         }
       }
     },
-    "/users/login/": {
+    "/users/login": {
       "post": {
         "tags": [ "Users" ],
         "summary": "Login",
@@ -112,7 +112,7 @@
       }
     },
     "/users/": {
-      "put": {
+      "patch": {
         "tags": [ "Users" ],
         "summary": "Edit user by id",
         "description": "Edit a exist user by id",
@@ -329,15 +329,15 @@
         "properties": {
           "user_id": {
             "type": "string",
-            "example": "1"
+            "example": "aa539dfe-f663-441b-8d52-6145ca168ff8"
           },
           "name": {
             "type": "string",
-            "example": "Test"
+            "example": "Test01"
           },
           "email": {
             "type": "string",
-            "example": "test@gmail.com"
+            "example": "test01@gmail.com"
           },
           "admin": {
             "type": "boolean",
@@ -353,7 +353,7 @@
           },
           "avatar": {
             "type": "string",
-            "example": "Em execução"
+            "example": "32643766643532346334666637326237663232352d4176617461722e706e67"
           },
           "department": {
             "type": "array",
