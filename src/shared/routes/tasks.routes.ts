@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import { ensureAuthenticated } from '../../middlewares/ensureAuthenticated';
 import { createTaskController } from "../../modules/task/useCase/createTask";
 import { deleteTaskController } from "../../modules/task/useCase/deleteTask";
 import { listAllTasksController } from '../../modules/task/useCase/listAllTasks';
@@ -8,6 +9,8 @@ import { updateProjectController } from "../../modules/task/useCase/updateProjec
 import { updateTaskController } from "../../modules/task/useCase/updateTask";
 
 export const tasksRoutes = Router();
+
+tasksRoutes.use(ensureAuthenticated);
 
 tasksRoutes.post('/:id', (request, response) => createTaskController.handle(request, response));
 
