@@ -3,7 +3,7 @@ import multer from 'multer';
 
 import multerConfig = require('../../config/uploads');
 
-import { ensureAuthenticated } from '../../middlewares/ensureAuthenticated';
+import { EnsureAuthenticated } from '../../middlewares/ensureAuthenticated';
 import { createUserController } from '../../modules/user/useCase/createUser';
 import { loginUserController } from '../../modules/user/useCase/loginUser';
 import { updateUserAvatarController } from '../../modules/user/useCase/updateUserAvatar';
@@ -15,7 +15,7 @@ usersRoutes.post('/register', (request, response) => createUserController.handle
 
 usersRoutes.get('/login', (request, response) => loginUserController.handle(request, response));
 
-usersRoutes.use(ensureAuthenticated);
+usersRoutes.use(EnsureAuthenticated);
 
 usersRoutes.patch('/avatar/:id', multer(multerConfig).single('avatarFile'), (request, response) => updateUserAvatarController.handle(request, response));
 
