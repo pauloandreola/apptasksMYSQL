@@ -18,16 +18,16 @@
 - Os testes devem contemplar os requisitos funcionais - 
 - Deverá existir tratamento de erro da aplicação - OK
 - Todos os registros no banco de dados deverão ter a coluna created_at e updated_at - OK
-- Para uploads, deverá ser feito utilizando form data - 
-- Utilizar middleware para validação de autenticação nas rotas públicas - 
+- Para uploads, deverá ser feito utilizando form data - OK
+- Utilizar middleware para validação de autenticação nas rotas públicas - OK*****
 
 # Funcionais
 
 - Deverá ser possível cadastrar um novo usuário. Será uma rota pública que receberá nome, e-mail e senha. O nome precisará ter pelo menos 3 caracteres. O e-mail deverá ser um e-mail válido. A senha deverá ter no mínimo 6 caracteres - Ok.
 - Não deverá existir usuários duplicados: verificar utilizando o e-mail - OK
 - Deverá ser possível realizar login. Será uma rota pública que receberá e-mail e senha. - Ok
-- Um usuário que não for cadastrado não deverá conseguir logar na aplicação -  
-- Deverá ser possível um usuário inserir uma nova foto de perfil. Será uma rota privada. - OK - Parcial
+- Um usuário que não for cadastrado não deverá conseguir logar na aplicação -  OK
+- Deverá ser possível um usuário inserir uma nova foto de perfil. Será uma rota privada. - OK
 - Deverá ser possível atualizar os dados de um usuário. Será uma rota privada. - OK
 - Deverá ser possível realizar a criação de uma task. Será uma rota privada. - OK
 - Deverá ser possível realizar a atualização de uma task. Será uma rota privada. Somente o usuário que criou a task poderá atualizá-la - OK - Parcial
