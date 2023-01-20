@@ -7,7 +7,7 @@ export class CreateTaskUseCase {
   async execute({ user_id, project, task  }: ICreateTaskDTO): Promise<void> {
 
     if (user_id.length != 36  ) {
-      throw new AppError('User is not valid number');
+      throw new AppError('Is not a Id valid ');
     }
     if (!project || !task ) {
       throw new AppError('Please verify a blank field');
