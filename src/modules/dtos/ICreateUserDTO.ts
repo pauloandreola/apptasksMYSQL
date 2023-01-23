@@ -1,5 +1,4 @@
 export interface ICreateUserDTO {
-  // user_id?: string,
   name: string,
   email: string,
   admin: boolean,
