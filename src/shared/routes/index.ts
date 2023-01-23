@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { TasksRepository } from '../../modules/task/infra/repositories/implementations/tasksRepository';
 import { UsersRepository } from '../../modules/user/infra/repositories/implementations/usersRepository';
-import { UsersTokenRepository } from '../../modules/user/infra/repositories/implementations/usersTokenRepository';
+import { UsersTokensRepository } from '../../modules/user/infra/repositories/implementations/usersTokensRepository';
 import { tasksRoutes } from '../routes/tasks.routes';
 import { usersRoutes } from '../routes/user.routes';
 
@@ -13,7 +13,7 @@ createTableUserRepository.createUserTable();
 const createTableTaskRepository = new TasksRepository();
 createTableTaskRepository.createTaskTable();
 
-const createTableUserTokenRepository = new UsersTokenRepository();
+const createTableUserTokenRepository = new UsersTokensRepository();
 createTableUserTokenRepository.createUserTokenTable();
 
 router.use('/tasks', tasksRoutes);
