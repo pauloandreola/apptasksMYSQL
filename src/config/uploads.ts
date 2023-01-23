@@ -33,5 +33,4 @@ module.exports = {
       callback(new Error('Invalid file type.'));
     }
   },
-
 }
