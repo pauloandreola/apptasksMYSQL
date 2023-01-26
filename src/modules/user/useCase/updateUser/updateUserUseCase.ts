@@ -1,7 +1,7 @@
 import { AppError } from '../../../../errors/appErrors';
 
 import { IUsersRepository } from '../../infra/repositories/IUsersRepository';
-
+import { IUsersTokensRepository } from 'modules/user/infra/repositories/IUsersTokensRepository';
 export class UpdateUserUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
@@ -15,6 +15,7 @@ export class UpdateUserUseCase {
     if (!user) {
       throw new AppError("User not found")
     }
+
     await this.usersRepository.updateUser(user_id, name);
   }
 }
