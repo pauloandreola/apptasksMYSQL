@@ -9,7 +9,7 @@ export class UpdateUserController {
       const id = request.params.id;
       const { name } = request.body;
       await this.updateUserUseCase.execute(id, name);
-      return response.json('User updated');
+      return response.status(202).json('User updated');
     } catch (error) {
       return response.status(405).json(error);
     }
