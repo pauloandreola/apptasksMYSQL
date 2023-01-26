@@ -1,5 +1,5 @@
 export interface ICreateUserTokenDTO {
-  'user_id': string
-  'expires_date': Date
-  'refresh_token': string
+  refresh_token: string,
+  expires_date: Date,
+  user_token_id: string,
 }
