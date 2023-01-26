@@ -9,15 +9,16 @@ import { IUsersRepository } from "../IUsersRepository"
 export class UsersRepository implements IUsersRepository {
   constructor() {}
 
-  async createUser({ name, email, admin, password, department }: ICreateUserDTO): Promise<void> {
+  async createUser({ name, email, admin, password, department }: ICreateUserDTO): Promise<User> {
     const conn = await connection();
     const user_id = uuidv4();
-    conn.query(`INSERT INTO users (user_id, name, email, admin, password, department) VALUES (?,?,?,?,?,?)`,[user_id, name, email, admin, password, department ]);
+      var [insertUser] = await conn.query(`INSERT INTO users (user_id, name, email, admin, password, department) VALUES (?,?,?,?,?,?)`,[user_id, name, email, admin, password, department ]);
+    return insertUser[0];
   }
 
-  async createUserTable(): Promise<void> { 
+  async createUserTable(): Promise<User> { 
     const conn = await connection();
-    var createTable = conn.query(`CREATE TABLE IF NOT EXISTS
+    const [createTable] = await conn.query(`CREATE TABLE IF NOT EXISTS
       users (
         user_id VARCHAR(100) PRIMARY KEY NOT NULL,
         name VARCHAR(255) NOT NULL,
@@ -28,6 +29,7 @@ export class UsersRepository implements IUsersRepository {
         department VARCHAR(20),
         created_at TIMESTAMP default now(),
         updated_at TIMESTAMP)`);
+    return createTable[0];
   }
 
   async findByEmail(email: string): Promise<User> {
