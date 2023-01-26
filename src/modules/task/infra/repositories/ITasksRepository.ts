@@ -2,8 +2,8 @@ import { ICreateTaskDTO } from "../../../dtos/ICreateTaskDTO";
 import { Task } from "../../entities/task";
 
 export interface ITasksRepository {
-  createTask(data: ICreateTaskDTO): Promise<void>;
-  createTaskTable(): Promise<void>;
+  createTask(data: ICreateTaskDTO): Promise<Task>;
+  createTaskTable(): Promise<Task>;
   deleteTask(task_id: string): Promise<void>;
   endTask(task_id: string, task: string): Promise<Task>;
   findUserAndTaskById(user_id: string, task_id: string): Promise<Task>;
