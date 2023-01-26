@@ -13,9 +13,9 @@
 - Utilizar ESLint, Prettier e ts-prune para manter o código dentro dos padrões - OK - ****Verificar****
 - O código deve estar seguindo boas práticas como Clean Code, SOLID, etc - OK
 - Em toda requisição que houver entrada de dados, deverá haver validação dos dados - OK
-- Aplicar testes unitários para as classes e funções de regras de negócio - 
-- Aplicar testes de integração para todos os endpoints da aplicação - 
-- Os testes devem contemplar os requisitos funcionais - 
+- Aplicar testes unitários para as classes e funções de regras de negócio - ****Fazer****
+- Aplicar testes de integração para todos os endpoints da aplicação - ****Fazer**** 
+- Os testes devem contemplar os requisitos funcionais -  ****Fazer****
 - Deverá existir tratamento de erro da aplicação - OK
 - Todos os registros no banco de dados deverão ter a coluna created_at e updated_at - OK
 - Para uploads, deverá ser feito utilizando form data - OK
@@ -30,6 +30,6 @@
 - Deverá ser possível um usuário inserir uma nova foto de perfil. Será uma rota privada. - OK
 - Deverá ser possível atualizar os dados de um usuário. Será uma rota privada. - OK
 - Deverá ser possível realizar a criação de uma task. Será uma rota privada. - OK
-- Deverá ser possível realizar a atualização de uma task. Será uma rota privada. Somente o usuário que criou a task poderá atualizá-la - OK - Parcial
+- Deverá ser possível realizar a atualização de uma task. Será uma rota privada. Somente o usuário que criou a task poderá atualizá-la - OK
 - Deverá ser possível realizar/deletar uma task. Será uma rota privada. Somente o usuário que criou a task poderá deletá-la - OK  
 - Deverá ser possível listar as tasks. Será uma rota privada. O usuário somente verá as tasks que ele mesmo criou. Deverá ser possível ordenar e filtrar as tasks com base nos campos "created_at", "updated_at" e "done" - 
