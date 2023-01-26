@@ -18,7 +18,11 @@ tasksRoutes.delete('/:id', (request, response) => deleteTaskController.handle(re
 
 tasksRoutes.get('/', (request, response) => listAllTasksController.handle(request, response));
 
+// tasksRoutes.get('/tasks/:id', (request, response) => listAllTasksByUserController.handle(request, response));
+
 tasksRoutes.get('/:id', (request, response) => listTaskController.handle(request, response));
+
+// tasksRoutes.get('/:id', (request, response) => listTaskController.handle(request, response));
 
 tasksRoutes.patch('/project/:id', (request, response) => updateProjectController.handle(request, response));
 
