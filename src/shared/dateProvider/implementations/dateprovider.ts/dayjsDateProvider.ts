@@ -7,8 +7,8 @@ dayjs.extend(utc);
 
 export class DayjsDateProvider implements IDateProvider {
 
-  addDays(days: number) {
-    return dayjs().add(days, 'days');
+  addDays(days: number): Date {
+    return dayjs().add(days, 'days').toDate();
   }
 
   compareInDays(start_date: Date, end_date: Date): number {
