@@ -63,7 +63,7 @@ export class TasksRepository implements ITasksRepository {
     return userId[0]; 
   }
 
-  async listAllTasksById(user_id: string): Promise<Task[]> {
+  async listAllTasksByUserId(user_id: string): Promise<Task[]> {
     const conn = await connection();
     const [tasks] = await conn.query(`SELECT * FROM tasks WHERE user_id = ?`,[user_id]);
     return tasks as any;
