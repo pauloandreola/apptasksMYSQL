@@ -46,14 +46,8 @@ export class TasksRepository implements ITasksRepository {
   }
 
   async findUserAndTaskById(user_id: string, task_id: string): Promise<Task> {
-    console.log('UR',user_id); 
-    console.log('TR',task_id); 
     const conn = await connection();
     const [task] = await conn.query(`SELECT * FROM tasks WHERE user_id = ? AND task_id = ?`,[user_id, task_id]);
-    console.log('R1',task);
-    console.log('R2',task[0]);
-    console.log('R3',[task]);
-
     return task[0]; 
   }
 
