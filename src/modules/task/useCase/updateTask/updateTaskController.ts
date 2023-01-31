@@ -9,7 +9,7 @@ export class UpdateTaskController {
       const task_id = request.params.id;
       const { task } = request.body;
       await this.updateTaskUseCase.execute(task_id, task);
-      return response.json("Task updated");
+      return response.status(202).json("Task updated");
     } catch (error) {
       return response.status(405).json(error);
     }

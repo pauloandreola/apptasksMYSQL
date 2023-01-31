@@ -9,7 +9,7 @@ export class UpdateProjectController {
       const task_id = request.params.id;
       const { project } = request.body;
       await this.updateProjectUseCase.execute(task_id, project);
-      return response.json("Project updated");
+      return response.status(202).json("Project updated");
     } catch (error) {
       return response.status(405).json(error);
     }
