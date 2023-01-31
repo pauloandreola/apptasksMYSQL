@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
+import { hash } from 'bcryptjs';
 
 import { User } from "../../../entities/user";
 import { connection } from "../../../../../shared/infra/services/db";
