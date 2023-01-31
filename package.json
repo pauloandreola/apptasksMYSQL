@@ -1,5 +1,5 @@
 {
-  "name": "apptasksMYSQL",
+  "name": "apptasksmysql",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/pauloandreola/apptasksMYSQL.git",
@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "ts-node-dev --poll --inspect --transpile-only --ignore-watch node-modules --respawn ./src/shared/infra/http/server.ts"
+    "dev": "ts-node-dev --poll --inspect --transpile-only --ignore-watch node-modules --respawn ./src/shared/infra/http/server.ts",
+    "find-deadcode": "ts-prune"
   },
   "dependencies": {
     "@types/multer": "^1.4.7",
